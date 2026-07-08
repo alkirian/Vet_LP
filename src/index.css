@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Nunito", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Quicksand", sans-serif;
+  
+  --color-brand-bg-warm: #fcf9f2;
+  --color-brand-primary: #3d5a80;
+  --color-brand-primary-light: #eef4f8;
+  --color-brand-secondary: #e07a5f;
+  --color-brand-accent: #f4a261;
+  --color-brand-text: #232f3e;
+  --color-brand-text-muted: #536478;
+}
+
+/* Formas orgánicas y de burbuja suave */
+.rounded-organic-1 {
+  border-radius: 2.5rem;
+}
+
+.rounded-organic-2 {
+  border-radius: 2.5rem;
+}
+
+.card-organic {
+  border-radius: 2.5rem;
+}
+
+.image-organic {
+  border-radius: 2rem;
+}
+
+/* Responsive font scaling for ultra-wide and 4K monitors */
+@media (min-width: 1536px) {
+  html {
+    font-size: 17px;
+  }
+}
+
+@media (min-width: 1920px) {
+  html {
+    font-size: 18.5px;
+  }
+}
+
+@media (min-width: 2560px) {
+  html {
+    font-size: 21.5px;
+  }
+}
+
+@media (min-width: 3840px) {
+  html {
+    font-size: 28px;
+  }
+}
+
+/* Ocultar barra de scroll en contenedores deslizables manteniendo la funcionalidad */
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari y Opera */
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE y Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+

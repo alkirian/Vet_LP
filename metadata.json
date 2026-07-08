@@ -1,0 +1,6 @@
+{
+  "name": "Veterinaria Pedrense",
+  "description": "Página web moderna para Veterinaria Pedrense en Las Piedras, Canelones, Uruguay. Cuidado profesional y compasivo para tus mascotas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
