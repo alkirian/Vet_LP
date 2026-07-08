@@ -47,7 +47,7 @@ export default function Footer() {
               href={`https://api.whatsapp.com/send?phone=598${cleanPhoneWhatsapp}&text=Hola!%20Me%20gustar%C3%ADa%20agendar%20un%20turno.`}
               target="_blank"
               rel="noreferrer"
-              className="w-full sm:w-auto text-center px-6 py-3 bg-brand-secondary hover:bg-brand-secondary/90 text-white font-bold text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5"
+              className="w-full sm:w-auto text-center px-6 py-3 bg-white hover:bg-brand-primary-light text-brand-primary font-extrabold text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5"
             >
               <MessageSquare className="w-4 h-4 fill-current" />
               Agendar Turno
@@ -90,16 +90,16 @@ export default function Footer() {
             <ul className="space-y-3.5 text-sm flex flex-col items-center md:items-start max-w-xs mx-auto md:mx-0">
               <li className="flex items-start gap-2.5 text-left w-full md:w-auto">
                 <MapPin className="w-4 h-4 text-brand-secondary shrink-0 mt-0.5" />
-                <span className="text-brand-primary-light/60">
+                <span className="text-brand-primary-light/85">
                   {contactInfo.address}, <br />
-                  <span className="text-xs text-brand-primary-light/40">{contactInfo.addressDetail}</span>
+                  <span className="text-xs text-brand-primary-light/75">{contactInfo.addressDetail}</span>
                 </span>
               </li>
               <li className="flex items-center gap-2.5 text-left w-full md:w-auto">
                 <Phone className="w-4 h-4 text-brand-secondary shrink-0" />
                 <a
                   href={`tel:${contactInfo.phoneLandline.replace(/\s+/g, "")}`}
-                  className="text-brand-primary-light/60 hover:text-brand-secondary transition-colors font-semibold"
+                  className="text-brand-primary-light/85 hover:text-brand-secondary transition-colors font-bold"
                 >
                   {contactInfo.phoneLandline} (Fijo)
                 </a>
@@ -110,14 +110,14 @@ export default function Footer() {
                   href={`https://api.whatsapp.com/send?phone=598${cleanPhoneWhatsapp}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-brand-primary-light/60 hover:text-brand-secondary transition-colors font-semibold"
+                  className="text-brand-primary-light/85 hover:text-brand-secondary transition-colors font-bold"
                 >
                   {contactInfo.phoneWhatsapp} (WhatsApp)
                 </a>
               </li>
               <li className="flex items-center gap-2.5 text-left w-full md:w-auto">
                 <Mail className="w-4 h-4 text-brand-secondary shrink-0" />
-                <a href={`mailto:${contactInfo.email}`} className="text-brand-primary-light/60 hover:text-brand-secondary transition-colors truncate block max-w-[200px] sm:max-w-none">
+                <a href={`mailto:${contactInfo.email}`} className="text-brand-primary-light/85 hover:text-brand-secondary transition-colors truncate block max-w-[200px] sm:max-w-none font-bold">
                   {contactInfo.email}
                 </a>
               </li>
@@ -128,14 +128,14 @@ export default function Footer() {
           <div className="space-y-4 text-center md:text-left" id="footer-hours-block">
             <h4 className="font-display font-bold text-white text-base text-center md:text-left">Horarios</h4>
             <div className="grid grid-cols-2 gap-x-4 max-w-[280px] mx-auto md:mx-0 text-xs sm:text-sm">
-              <div className="text-left text-brand-primary-light/60 space-y-2.5 font-semibold">
+              <div className="text-left text-brand-primary-light/85 space-y-2.5 font-bold">
                 {businessHours.map((bh, idx) => (
                   <div key={idx} className={bh.isSpecial ? "text-brand-accent" : ""}>
                     {bh.dayGroup}
                   </div>
                 ))}
               </div>
-              <div className="text-right text-brand-primary-light/80 space-y-2.5 font-bold sm:font-semibold">
+              <div className="text-right text-brand-primary-light/95 space-y-2.5 font-black sm:font-bold">
                 {businessHours.map((bh, idx) => (
                   <div key={idx} className={bh.isSpecial ? "text-brand-accent" : ""}>
                     {bh.hours}
@@ -143,7 +143,7 @@ export default function Footer() {
                 ))}
               </div>
             </div>
-            <div className="mt-4 pt-3 border-t border-white/10 text-[11px] text-brand-primary-light/40 text-center md:text-left max-w-[280px] mx-auto md:mx-0">
+            <div className="mt-4 pt-3 border-t border-white/10 text-[11px] text-brand-primary-light/75 text-center md:text-left max-w-[280px] mx-auto md:mx-0">
               <span className="text-brand-accent font-bold block mb-0.5">Domingo Atendido:</span>
               Asistencia por urgencias y consultas de fin de semana por la mañana.
             </div>
@@ -151,7 +151,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom copyright details */}
-        <div className="mt-16 pt-8 border-t border-white/10 text-center flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-brand-primary-light/40">
+        <div className="mt-16 pt-8 border-t border-white/10 text-center flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-brand-primary-light/75">
           <p>
             © {currentYear} Veterinaria Pedrense. Todos los derechos reservados. Las Piedras, Canelones, Uruguay.
           </p>

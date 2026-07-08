@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Stethoscope, Scissors, Pill, ShoppingBag, Check, X, ArrowRight, MessageSquare, Camera } from "lucide-react";
+import { Stethoscope, Scissors, Pill, ShoppingBag, Check, X, ArrowRight, MessageSquare, Camera, ChevronLeft, ChevronRight } from "lucide-react";
 import { servicesData } from "../data";
 import { ServiceItem } from "../types";
 import { motion, AnimatePresence } from "motion/react";
@@ -28,6 +28,32 @@ const IconMapper = ({ name, className }: { name: string; className?: string }) =
 
 export default function Services({ onModalToggle }: { onModalToggle?: (isOpen: boolean) => void }) {
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  const handleScroll = () => {
+    if (!containerRef.current) return;
+    const { scrollLeft, clientWidth } = containerRef.current;
+    if (clientWidth === 0) return;
+    
+    // Each card is w-full (clientWidth) and the gap is gap-6 (24px)
+    const gap = 24;
+    const index = Math.round(scrollLeft / (clientWidth + gap));
+    if (index !== activeIndex && index >= 0 && index < servicesData.length) {
+      setActiveIndex(index);
+    }
+  };
+
+  const scrollToService = (index: number) => {
+    if (!containerRef.current) return;
+    const { clientWidth } = containerRef.current;
+    const gap = 24;
+    containerRef.current.scrollTo({
+      left: index * (clientWidth + gap),
+      behavior: "smooth",
+    });
+    setActiveIndex(index);
+  };
 
   React.useEffect(() => {
     onModalToggle?.(selectedService !== null);
@@ -59,72 +85,127 @@ export default function Services({ onModalToggle }: { onModalToggle?: (isOpen: b
           </p>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" id="services-grid">
-          {servicesData.map((service, index) => (
-            <motion.div
-              key={service.id}
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 }
-              }}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -6 }}
-              className="group flex flex-col h-full bg-white card-organic border border-brand-primary-light/50 hover:border-brand-primary/30 hover:shadow-xl transition-all duration-300 overflow-hidden"
-              id={`service-card-${service.id}`}
-            >
-              {/* Image banner for card */}
-              <div className="p-4 pb-0">
-                <div className="h-40 relative overflow-hidden image-organic">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-text/40 via-transparent to-transparent" />
-                  <div className="absolute top-3 left-3 bg-brand-bg-warm/95 backdrop-blur-md p-2.5 rounded-2xl text-brand-primary shadow-md overflow-hidden">
-                    <motion.div
-                      variants={{
-                        hover: ICON_HOVER_VARIANTS[service.id] || {}
-                      }}
-                      transition={{ duration: 0.5, ease: "easeInOut" }}
-                    >
-                      <IconMapper name={service.iconName} className="w-5.5 h-5.5" />
-                    </motion.div>
-                  </div>
-                  {/* Test Photo Badge */}
-                  <div className="absolute top-3 right-3 bg-brand-secondary/90 backdrop-blur-xs text-white font-sans text-[9px] font-bold px-2 py-0.5 rounded-lg shadow-sm border border-brand-secondary/20 flex items-center gap-1 z-10 select-none">
-                    <Camera className="w-2.5 h-2.5" />
-                    <span>Foto de prueba</span>
+        {/* Services Grid / Carousel */}
+        <div className="relative">
+          <motion.div
+            ref={containerRef}
+            onScroll={handleScroll}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.1
+                }
+              }
+            }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory no-scrollbar scroll-smooth pb-2 sm:pb-0"
+            id="services-grid"
+          >
+            {servicesData.map((service, index) => (
+              <motion.div
+                key={service.id}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -6 }}
+                className="group flex flex-col h-full bg-white card-organic border border-brand-primary-light/50 hover:border-brand-primary/30 hover:shadow-xl transition-all duration-300 overflow-hidden w-full shrink-0 snap-center sm:w-auto sm:shrink"
+                id={`service-card-${service.id}`}
+              >
+                {/* Image banner for card */}
+                <div className="p-4 pb-0">
+                  <div className="h-40 relative overflow-hidden image-organic">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-text/40 via-transparent to-transparent" />
+                    <div className="absolute top-3 left-3 bg-brand-bg-warm/95 backdrop-blur-md p-2.5 rounded-2xl text-brand-primary shadow-md overflow-hidden">
+                      <motion.div
+                        variants={{
+                          hover: ICON_HOVER_VARIANTS[service.id] || {}
+                        }}
+                        transition={{ duration: 0.5, ease: "easeInOut" }}
+                      >
+                        <IconMapper name={service.iconName} className="w-5.5 h-5.5" />
+                      </motion.div>
+                    </div>
+                    {/* Test Photo Badge */}
+                    <div className="absolute top-3 right-3 bg-brand-secondary/90 backdrop-blur-xs text-white font-sans text-[9px] font-bold px-2 py-0.5 rounded-lg shadow-sm border border-brand-secondary/20 flex items-center gap-1 z-10 select-none">
+                      <Camera className="w-2.5 h-2.5" />
+                      <span>Foto de prueba</span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Card Body */}
-              <div className="p-6 flex flex-col flex-grow">
-                <h3 className="font-display font-bold text-lg text-brand-text mb-2 group-hover:text-brand-primary transition-colors">
-                  {service.title}
-                </h3>
-                <p className="font-sans text-brand-text-muted text-sm leading-relaxed mb-6 flex-grow line-clamp-4 font-normal">
-                  {service.description}
-                </p>
+                {/* Card Body */}
+                <div className="p-6 flex flex-col flex-grow">
+                  <h3 className="font-display font-bold text-lg text-brand-text mb-2 group-hover:text-brand-primary transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="font-sans text-brand-text-muted text-sm leading-relaxed mb-6 flex-grow line-clamp-4 font-normal">
+                    {service.description}
+                  </p>
 
-                {/* Button Action */}
-                <button
-                  onClick={() => setSelectedService(service)}
-                  className="w-full py-3 px-4 rounded-xl bg-brand-bg-warm border border-brand-primary-light/60 text-brand-text font-sans font-bold text-xs group-hover:bg-brand-primary group-hover:text-white group-hover:border-brand-primary transition-all flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
-                  id={`btn-details-${service.id}`}
-                >
-                  Ver detalles
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                </button>
-              </div>
-            </motion.div>
-          ))}
+                  {/* Button Action */}
+                  <button
+                    onClick={() => setSelectedService(service)}
+                    className="w-full py-3 px-4 rounded-xl bg-brand-bg-warm border border-brand-primary-light/60 text-brand-text font-sans font-bold text-xs group-hover:bg-brand-primary group-hover:text-white group-hover:border-brand-primary transition-all flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+                    id={`btn-details-${service.id}`}
+                  >
+                    Ver detalles
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Carousel Controls for Mobile */}
+        <div className="flex items-center justify-center gap-6 mt-8 sm:hidden" id="services-controls">
+          <button
+            onClick={() => scrollToService(activeIndex - 1)}
+            disabled={activeIndex === 0}
+            className="w-10 h-10 rounded-full bg-brand-bg-warm hover:bg-brand-primary-light/50 text-brand-primary flex items-center justify-center border border-brand-primary-light/80 transition-all duration-200 cursor-pointer disabled:opacity-30 disabled:pointer-events-none shadow-xs"
+            aria-label="Servicio anterior"
+          >
+            <ChevronLeft className="w-5 h-5 stroke-[2.5]" />
+          </button>
+
+          <div className="flex gap-1" id="services-dots">
+            {servicesData.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => scrollToService(idx)}
+                className="w-6 h-6 flex items-center justify-center cursor-pointer"
+                aria-label={`Ir al servicio ${idx + 1}`}
+              >
+                <span
+                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                    activeIndex === idx
+                      ? "bg-brand-primary w-6"
+                      : "bg-brand-text-muted/20 w-2.5 hover:bg-brand-text-muted/40"
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
+
+          <button
+            onClick={() => scrollToService(activeIndex + 1)}
+            disabled={activeIndex === servicesData.length - 1}
+            className="w-10 h-10 rounded-full bg-brand-bg-warm hover:bg-brand-primary-light/50 text-brand-primary flex items-center justify-center border border-brand-primary-light/80 transition-all duration-200 cursor-pointer disabled:opacity-30 disabled:pointer-events-none shadow-xs"
+            aria-label="Servicio siguiente"
+          >
+            <ChevronRight className="w-5 h-5 stroke-[2.5]" />
+          </button>
         </div>
 
         {/* Dynamic Highlight Bar */}

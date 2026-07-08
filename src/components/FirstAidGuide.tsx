@@ -269,7 +269,7 @@ export default function FirstAidGuide() {
         </div>
 
         {/* Layout Grid */}
-        <div className="grid lg:grid-cols-12 gap-8 items-start" id="first-aid-content">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start" id="first-aid-content">
           
           {/* Left Column: Categories Selector */}
           <div className="lg:col-span-4 space-y-3" id="first-aid-categories">

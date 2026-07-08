@@ -41,7 +41,7 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative min-h-screen pt-28 pb-24 flex items-center bg-brand-bg-warm overflow-hidden"
+      className="relative min-h-screen pt-20 pb-12 lg:pt-28 lg:pb-24 flex items-center bg-brand-bg-warm overflow-hidden"
     >
       {/* Decorative background shapes */}
       <div className="absolute top-1/4 -right-20 w-96 h-96 bg-brand-accent/10 rounded-full blur-3xl z-0" />
@@ -65,7 +65,7 @@ export default function Hero() {
               <img
                 src={logoOk}
                 alt="Clínica Veterinaria Pedrense"
-                className="w-full max-w-[28rem] sm:max-w-[34rem] md:max-w-[40rem] h-auto object-contain hover:scale-[1.01] transition-transform duration-300"
+                className="w-full max-w-xs sm:max-w-md lg:max-w-[28rem] h-auto object-contain hover:scale-[1.01] transition-transform duration-300"
               />
             </motion.div>
 
@@ -126,21 +126,21 @@ export default function Hero() {
               <div className="flex items-start gap-2.5 text-left">
                 <Clock className="w-5 h-5 text-brand-primary shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-sans font-bold text-xs text-brand-text">Abierto los Domingos</h4>
+                  <div className="font-sans font-bold text-xs text-brand-text">Abierto los Domingos</div>
                   <p className="font-sans text-[10px] text-brand-text-muted">Horario de 09:00 a 12:30 hs</p>
                 </div>
               </div>
               <div className="flex items-start gap-2.5 text-left">
                 <ShieldCheck className="w-5 h-5 text-brand-primary shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-sans font-bold text-xs text-brand-text">Equipo Profesional</h4>
+                  <div className="font-sans font-bold text-xs text-brand-text">Equipo Profesional</div>
                   <p className="font-sans text-[10px] text-brand-text-muted">Veterinarios colegiados</p>
                 </div>
               </div>
               <div className="hidden sm:flex items-start gap-2.5 text-left">
                 <Heart className="w-5 h-5 text-brand-primary shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-sans font-bold text-xs text-brand-text">Fácil Acceso</h4>
+                  <div className="font-sans font-bold text-xs text-brand-text">Fácil Acceso</div>
                   <p className="font-sans text-[10px] text-brand-text-muted">Luis Batlle Berres y Ruta 48</p>
                 </div>
               </div>

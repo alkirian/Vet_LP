@@ -141,7 +141,7 @@ export const membershipPlans: MembershipPlan[] = [
   {
     id: "plan-socio",
     name: "Socio Protector",
-    price: "1.200",
+    price: "500",
     frequency: "mes",
     popular: true,
     color: "blue",
