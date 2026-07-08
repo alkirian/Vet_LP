@@ -3,6 +3,7 @@ import { Menu, X, Phone, MessageSquare } from "lucide-react";
 import { contactInfo } from "../data";
 import { motion, AnimatePresence } from "motion/react";
 import { Isologo } from "./Logo";
+import { getWhatsAppLink } from "../utils/whatsapp";
 
 interface HeaderProps {
   activeSection: string;
@@ -21,7 +22,7 @@ export default function Header({ activeSection, onMenuToggle }: HeaderProps) {
         setIsScrolled(false);
       }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -133,7 +134,7 @@ export default function Header({ activeSection, onMenuToggle }: HeaderProps) {
                 {contactInfo.phoneLandline}
               </a>
               <a
-                href={`https://api.whatsapp.com/send?phone=598${contactInfo.phoneWhatsapp.replace(/\s+/g, "")}&text=Hola!%20Me%20gustar%C3%ADa%20agendar%20un%20turno%20para%20mi%20mascota.`}
+                href={getWhatsAppLink("Hola! Me gustaría agendar un turno para mi mascota.")}
                 target="_blank"
                 rel="noreferrer"
                 className="bg-brand-secondary text-white font-sans font-bold text-sm px-4 py-2 rounded-xl hover:bg-brand-secondary/90 shadow-md shadow-brand-secondary/15 transition-all hover:scale-[1.02] flex items-center gap-1.5"
@@ -218,7 +219,7 @@ export default function Header({ activeSection, onMenuToggle }: HeaderProps) {
                     Llamar al {contactInfo.phoneLandline}
                   </a>
                   <a
-                    href={`https://api.whatsapp.com/send?phone=598${contactInfo.phoneWhatsapp.replace(/\s+/g, "")}&text=Hola!%20Me%20gustar%C3%ADa%20agendar%20un%20turno%20para%20mi%20mascota.`}
+                    href={getWhatsAppLink("Hola! Me gustaría agendar un turno para mi mascota.")}
                     target="_blank"
                     rel="noreferrer"
                     className="flex items-center justify-center py-3.5 bg-brand-secondary hover:bg-brand-secondary/90 text-white font-sans font-bold rounded-xl shadow-lg shadow-brand-secondary/10 transition-all min-h-[48px]"

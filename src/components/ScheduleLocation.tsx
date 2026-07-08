@@ -2,10 +2,9 @@ import { Clock, MapPin, Phone, MessageSquare, ExternalLink, ShieldCheck } from "
 import { businessHours, contactInfo } from "../data";
 import { motion } from "motion/react";
 import { PawIcon } from "./Logo";
+import { getWhatsAppLink } from "../utils/whatsapp";
 
 export default function ScheduleLocation() {
-  const cleanPhoneWhatsapp = contactInfo.phoneWhatsapp.replace(/\s+/g, "");
-
   return (
     <section id="ubicacion" className="py-20 bg-brand-bg-warm relative overflow-hidden">
       {/* Background decorations */}
@@ -108,7 +107,7 @@ export default function ScheduleLocation() {
                       <span>Fijo: {contactInfo.phoneLandline}</span>
                     </a>
                     <a
-                      href={`https://api.whatsapp.com/send?phone=598${cleanPhoneWhatsapp}`}
+                      href={getWhatsAppLink()}
                       target="_blank"
                       rel="noreferrer"
                       className="text-sm text-brand-primary font-bold hover:text-brand-secondary hover:underline flex items-center gap-1"

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { X, User, Mail, Phone, ShieldCheck, ChevronRight, ChevronLeft, Check, Sparkles, ExternalLink, Calendar, Heart, Award, Lock, Info } from "lucide-react";
 import { MembershipPlan } from "../types";
-import { contactInfo } from "../data";
 import { motion, AnimatePresence } from "motion/react";
+import { getWhatsAppLink } from "../utils/whatsapp";
 
 interface MembershipModalProps {
   plan: MembershipPlan;
@@ -24,8 +24,6 @@ export default function MembershipModal({ plan, onClose }: MembershipModalProps)
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [memberNumber] = useState(() => `CP-${Math.floor(10000 + Math.random() * 90000)}`);
-  
-  const cleanPhoneWhatsapp = contactInfo.phoneWhatsapp.replace(/\s+/g, "");
 
   const validateStep1 = () => {
     const newErrors: Record<string, string> = {};
@@ -88,7 +86,7 @@ export default function MembershipModal({ plan, onClose }: MembershipModalProps)
   };
 
   const getWhatsAppMessage = () => {
-    const text = `¡Hola! Acabo de registrarme en el Plan de Socio de la veterinaria al *${plan.name}* y quiero coordinar la afiliación.
+    return `¡Hola! Acabo de registrarme en el Plan de Socio de la veterinaria al *${plan.name}* y quiero coordinar la afiliación.
     
 *Datos del Propietario:*
 - Nombre: ${ownerName}
@@ -103,8 +101,6 @@ export default function MembershipModal({ plan, onClose }: MembershipModalProps)
 - Raza: ${petBreed}
 
 Ya inicié el proceso de pago por Mercado Pago. ¡Muchas gracias!`;
-
-    return encodeURIComponent(text);
   };
 
   return (
@@ -460,7 +456,7 @@ Ya inicié el proceso de pago por Mercado Pago. ¡Muchas gracias!`;
                   </p>
                   
                   <a
-                    href={`https://api.whatsapp.com/send?phone=598${cleanPhoneWhatsapp}&text=${getWhatsAppMessage()}`}
+                    href={getWhatsAppLink(getWhatsAppMessage())}
                     target="_blank"
                     rel="noreferrer"
                     className="w-full flex items-center justify-center gap-2 bg-brand-secondary hover:bg-brand-secondary/90 text-white font-bold py-3.5 rounded-xl transition-all shadow-md shadow-brand-secondary/15 text-xs"

@@ -11,7 +11,7 @@ import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
 import GlobalScrollTrail from "./components/GlobalScrollTrail";
 import { motion, AnimatePresence } from "motion/react";
-import { contactInfo } from "./data";
+import { getWhatsAppLink } from "./utils/whatsapp";
 
 export default function App() {
   const [activeSection, setActiveSection] = useState("inicio");
@@ -50,7 +50,7 @@ export default function App() {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -69,7 +69,7 @@ export default function App() {
     });
   };
 
-  const cleanPhoneWhatsapp = contactInfo.phoneWhatsapp.replace(/\s+/g, "");
+  const whatsappMessage = "Hola! Me gustaría agendar un turno para mi mascota en Veterinaria Pedrense.";
 
   return (
     <div className="min-h-screen bg-brand-bg-warm text-brand-text font-sans selection:bg-brand-secondary selection:text-white antialiased">
@@ -101,7 +101,7 @@ export default function App() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.2 }}
-              href={`https://api.whatsapp.com/send?phone=598${cleanPhoneWhatsapp}&text=Hola!%20Me%20gustar%C3%ADa%20agendar%20un%20turno%20para%20mi%20mascota%20en%20Veterinaria%20Pedrense.`}
+              href={getWhatsAppLink(whatsappMessage)}
               target="_blank"
               rel="noreferrer"
               className="bg-brand-secondary hover:bg-brand-secondary/90 text-white p-4 rounded-xl shadow-xl shadow-brand-secondary/20 hover:shadow-brand-secondary/30 transition-all hover:scale-105 flex items-center justify-center border border-brand-secondary/80"
@@ -135,7 +135,7 @@ export default function App() {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            href={`https://api.whatsapp.com/send?phone=598${cleanPhoneWhatsapp}&text=Hola!%20Me%20gustar%C3%ADa%20agendar%20un%20turno%20para%20mi%20mascota%20en%20Veterinaria%20Pedrense.`}
+            href={getWhatsAppLink(whatsappMessage)}
             target="_blank"
             rel="noreferrer"
             className="fixed bottom-6 right-6 z-40 w-14 h-14 bg-brand-secondary text-white rounded-full shadow-xl shadow-brand-secondary/30 flex items-center justify-center border border-brand-secondary/80 active:scale-95 transition-transform md:hidden cursor-pointer"

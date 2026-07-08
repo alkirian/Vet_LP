@@ -53,7 +53,7 @@ export default function Hero() {
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           {/* Text Content */}
           <div className="lg:col-span-6 space-y-8 text-center lg:text-left" id="hero-text-container">
-
+            <h1 className="sr-only">Veterinaria Pedrense | Clínica Veterinaria en Las Piedras, Canelones</h1>
 
             {/* Main Logo instead of text headline */}
             <motion.div

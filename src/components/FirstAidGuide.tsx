@@ -15,6 +15,7 @@ import {
   HeartPulse
 } from "lucide-react";
 import { contactInfo } from "../data";
+import { getWhatsAppLink } from "../utils/whatsapp";
 import { motion, AnimatePresence } from "motion/react";
 import { FloatingPaws } from "./Logo";
 
@@ -242,8 +243,6 @@ export default function FirstAidGuide() {
     }
   };
 
-  const cleanPhoneWhatsapp = contactInfo.phoneWhatsapp.replace(/\s+/g, "");
-
   return (
     <section id="primeros-auxilios" className="py-20 bg-brand-bg-warm relative overflow-hidden">
       {/* Background decoration */}
@@ -427,7 +426,7 @@ export default function FirstAidGuide() {
                     )}
 
                     <a
-                      href={`https://api.whatsapp.com/send?phone=598${cleanPhoneWhatsapp}&text=Hola!%20Tengo%20una%20duda%20m%C3%A9dica%20urgente%20con%20mi%20mascota%20por%20un%20caso%20de%20*${encodeURIComponent(currentCase.title)}*.`}
+                      href={getWhatsAppLink(`Hola! Tengo una duda médica urgente con mi mascota por un caso de *${currentCase.title}*.`)}
                       target="_blank"
                       rel="noreferrer"
                       className="flex items-center justify-center gap-2 px-6 py-3.5 bg-brand-secondary hover:bg-brand-secondary/95 text-white font-sans font-bold text-sm rounded-xl shadow-md transition-all hover:scale-[1.01]"

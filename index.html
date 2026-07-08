@@ -16,7 +16,7 @@
     <meta property="og:url" content="https://veterinariapedrense.uy/" />
     <meta property="og:title" content="Veterinaria Pedrense | Cuidado de Mascotas en Las Piedras" />
     <meta property="og:description" content="Atención médica veterinaria profesional, cirugías con amor, farmacia y pet shop de confianza. Abierto de lunes a domingos." />
-    <meta property="og:image" content="/share-logo.png" />
+    <meta property="og:image" content="https://veterinariapedrense.uy/share-logo.png" />
     <meta property="og:site_name" content="Veterinaria Pedrense" />
 
     <!-- Twitter -->
@@ -24,10 +24,117 @@
     <meta property="twitter:url" content="https://veterinariapedrense.uy/" />
     <meta property="twitter:title" content="Veterinaria Pedrense | Cuidado de Mascotas en Las Piedras" />
     <meta property="twitter:description" content="Atención médica veterinaria profesional, cirugías con amor, farmacia y pet shop de confianza." />
-    <meta property="twitter:image" content="/share-logo.png" />
+    <meta property="twitter:image" content="https://veterinariapedrense.uy/share-logo.png" />
 
+    <!-- Google Fonts Preconnect (Performance Optimization) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Icons -->
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+    <!-- JSON-LD Structured Data (Local Business & FAQ Page) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "VeterinaryCare",
+        "name": "Veterinaria Pedrense",
+        "image": "https://veterinariapedrense.uy/share-logo.png",
+        "@id": "https://veterinariapedrense.uy/#veterinarycare",
+        "url": "https://veterinariapedrense.uy/",
+        "telephone": "+59823660012",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Luis Batlle Berres s/n esquina Ruta 48",
+          "addressLocality": "Las Piedras",
+          "addressRegion": "Canelones",
+          "addressCountry": "UY"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "-34.71183",
+          "longitude": "-56.2232599"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "20:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "09:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Sunday",
+            "opens": "09:00",
+            "closes": "12:30"
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Es necesario agendar turno para una consulta general?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Para optimizar el tiempo de espera, sugerimos agendar la consulta de forma anticipada. De todas maneras, atendemos urgencias y consultas espontáneas por orden de llegada dentro de nuestro horario habitual."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué debo tener en cuenta antes de una cirugía o castración?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí, todo procedimiento quirúrgico requiere ayuno previo de sólidos y líquidos de 8 a 12 horas. Al momento de coordinar la cirugía, le brindaremos las indicaciones exactas según la edad y especie del paciente."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Abren los domingos?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. Atendemos los domingos de mañana de 09:00 a 12:30 hs para consultas programadas de fin de semana y asistencia de urgencias dentro de ese horario."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿En qué consiste el Plan de Socios y cómo funciona la membresía?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "El Plan de Socios es un programa de cobertura médica prepaga. Mediante una cuota mensual fija, accede a consultas clínicas generales bonificadas sin límite, vacunación anual y descuentos en pet shop, farmacia y alimentos."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Tengo un período mínimo de permanencia al asociarme?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No hay período de permanencia mínima. Puede cancelar la membresía en cualquier momento directamente desde su perfil de Mercado Pago o comunicándolo a la clínica antes de que se emita la facturación del siguiente período."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Los descuentos aplican para cualquier mascota que tenga?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí, la membresía es individual por mascota registrada para llevar un correcto control del historial clínico. Si cuenta con más de una mascota, puede asociar a cada una de forma independiente en el plan que prefiera."
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

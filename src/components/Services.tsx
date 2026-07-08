@@ -1,29 +1,33 @@
 import React, { useState } from "react";
 import { Stethoscope, Scissors, Pill, ShoppingBag, Check, X, ArrowRight, MessageSquare, Camera } from "lucide-react";
-import { servicesData, contactInfo } from "../data";
+import { servicesData } from "../data";
 import { ServiceItem } from "../types";
 import { motion, AnimatePresence } from "motion/react";
 import { PawIcon, FloatingPaws } from "./Logo";
+import { getWhatsAppLink } from "../utils/whatsapp";
+
+const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  Stethoscope,
+  Scissors,
+  Pills: Pill,
+  ShoppingBag,
+};
+
+const ICON_HOVER_VARIANTS: Record<string, any> = {
+  "consulta-clinica": { rotate: [-10, 10, -10, 10, 0] },
+  "cirugias-castraciones": { scale: [1, 0.85, 1.1, 0.95, 1], rotate: [0, -12, 12, 0] },
+  "farmacia-veterinaria": { y: [0, -6, 2, -3, 0] },
+  "pet-shop": { scale: [1, 1.15, 0.9, 1.05, 1], rotate: [0, 8, -8, 0] },
+};
 
 // Helper function to map string icon name to Lucide Component
 const IconMapper = ({ name, className }: { name: string; className?: string }) => {
-  switch (name) {
-    case "Stethoscope":
-      return <Stethoscope className={className} />;
-    case "Scissors":
-      return <Scissors className={className} />;
-    case "Pills":
-      return <Pill className={className} />;
-    case "ShoppingBag":
-      return <ShoppingBag className={className} />;
-    default:
-      return <Stethoscope className={className} />;
-  }
+  const Component = ICON_MAP[name] || Stethoscope;
+  return <Component className={className} />;
 };
 
 export default function Services({ onModalToggle }: { onModalToggle?: (isOpen: boolean) => void }) {
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
-  const cleanPhoneWhatsapp = contactInfo.phoneWhatsapp.replace(/\s+/g, "");
 
   React.useEffect(() => {
     onModalToggle?.(selectedService !== null);
@@ -85,15 +89,7 @@ export default function Services({ onModalToggle }: { onModalToggle?: (isOpen: b
                   <div className="absolute top-3 left-3 bg-brand-bg-warm/95 backdrop-blur-md p-2.5 rounded-2xl text-brand-primary shadow-md overflow-hidden">
                     <motion.div
                       variants={{
-                        hover: service.id === "consulta-clinica"
-                          ? { rotate: [-10, 10, -10, 10, 0] }
-                          : service.id === "cirugias-castraciones"
-                          ? { scale: [1, 0.85, 1.1, 0.95, 1], rotate: [0, -12, 12, 0] }
-                          : service.id === "farmacia-veterinaria"
-                          ? { y: [0, -6, 2, -3, 0] }
-                          : service.id === "pet-shop"
-                          ? { scale: [1, 1.15, 0.9, 1.05, 1], rotate: [0, 8, -8, 0] }
-                          : {}
+                        hover: ICON_HOVER_VARIANTS[service.id] || {}
                       }}
                       transition={{ duration: 0.5, ease: "easeInOut" }}
                     >
@@ -258,7 +254,7 @@ export default function Services({ onModalToggle }: { onModalToggle?: (isOpen: b
                     Cerrar
                   </button>
                   <a
-                    href={`https://api.whatsapp.com/send?phone=598${cleanPhoneWhatsapp}&text=Hola!%20Me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20el%20servicio%20de%20${encodeURIComponent(selectedService.title)}%20en%20Veterinaria%20Pedrense.`}
+                    href={getWhatsAppLink(`Hola! Me gustaría saber más sobre el servicio de ${selectedService.title} en Veterinaria Pedrense.`)}
                     target="_blank"
                     rel="noreferrer"
                     className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-5 py-2.5 bg-brand-secondary hover:bg-brand-secondary/90 text-white font-sans font-bold text-xs rounded-xl shadow-md transition-colors"
