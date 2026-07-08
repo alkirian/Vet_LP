@@ -276,22 +276,25 @@ export default function FirstAidGuide() {
             <span className="text-xs font-bold text-brand-text uppercase tracking-wider block mb-2 px-1">
               1. Selecciona un área:
             </span>
-            <div className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible pb-3 lg:pb-0 gap-2.5 snap-x no-scrollbar -mx-4 px-4 lg:mx-0 lg:px-0">
-              {categories.map((cat) => {
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 lg:flex lg:flex-col gap-2.5">
+              {categories.map((cat, idx) => {
                 const IconComponent = cat.icon;
                 const isActive = activeCategory === cat.id;
+                const isLastOdd = idx === categories.length - 1 && categories.length % 2 !== 0;
                 return (
                   <button
                     key={cat.id}
                     onClick={() => handleCategoryChange(cat.id)}
-                    className={`flex items-center gap-3 px-4 py-3 sm:py-3.5 rounded-2xl border text-sm font-bold transition-all cursor-pointer shrink-0 snap-start min-h-[48px] lg:w-full ${
+                    className={`flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3.5 rounded-2xl border text-xs sm:text-sm font-bold transition-all cursor-pointer min-h-[44px] sm:min-h-[48px] lg:w-full ${
+                      isLastOdd ? "col-span-2 sm:col-span-1" : ""
+                    } ${
                       isActive
                         ? "bg-brand-primary border-brand-primary text-white shadow-lg shadow-brand-primary/10"
                         : "bg-white border-brand-primary-light text-brand-text-muted hover:border-brand-primary/45 hover:text-brand-text"
                     }`}
                   >
-                    <IconComponent className={`w-5 h-5 ${isActive ? "text-brand-accent" : "text-brand-primary"}`} />
-                    <span>{cat.name}</span>
+                    <IconComponent className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 ${isActive ? "text-brand-accent" : "text-brand-primary"}`} />
+                    <span className="text-left leading-tight">{cat.name}</span>
                   </button>
                 );
               })}
