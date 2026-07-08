@@ -442,7 +442,7 @@ export default function FirstAidGuide() {
         </div>
       </div>
       {/* Divisor curvo hacia Club de Socios */}
-      <div className="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none z-20">
+      <div id="curve-to-club" className="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none z-20">
         <svg viewBox="0 0 1440 100" preserveAspectRatio="none" className="relative block w-full h-[60px] md:h-[80px]">
           <path d="M0,80 C480,0 960,100 1440,20 L1440,100 L0,100 Z" fill="var(--color-brand-primary)" />
         </svg>

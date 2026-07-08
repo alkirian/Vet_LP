@@ -9,6 +9,7 @@ export default function GlobalScrollTrail() {
   const [viewportHeight, setViewportHeight] = useState(1000);
   const [windowWidth, setWindowWidth] = useState(() => typeof window !== "undefined" ? window.innerWidth : 1200);
   const [sectionOffsets, setSectionOffsets] = useState<number[]>([]);
+  const [blueRanges, setBlueRanges] = useState<{ top: number; bottom: number }[]>([]);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -30,6 +31,31 @@ export default function GlobalScrollTrail() {
         return el ? el.offsetTop : 0;
       });
       setSectionOffsets(offsets);
+
+      // Define the sections/elements that have blue backgrounds
+      const blueSections = [
+        { id: "club", hasBottomCurve: true },
+        { id: "testimonios", hasBottomCurve: true },
+        { id: "curve-to-club", hasBottomCurve: false },
+        { id: "curve-to-testimonios", hasBottomCurve: false }
+      ];
+
+      const ranges = blueSections.map(({ id, hasBottomCurve }) => {
+        const el = document.getElementById(id);
+        if (el) {
+          const top = el.offsetTop;
+          let bottom = el.offsetTop + el.offsetHeight;
+          if (hasBottomCurve) {
+            // Subtract the curved divider's height so paws revert to dark color when exiting the blue area
+            const curveHeight = window.innerWidth < 768 ? 55 : 75;
+            bottom -= curveHeight;
+          }
+          return { top, bottom };
+        }
+        return null;
+      }).filter((r): r is { top: number; bottom: number } => r !== null);
+
+      setBlueRanges(ranges);
     };
 
     updateDimensions();
@@ -218,10 +244,17 @@ export default function GlobalScrollTrail() {
         const scrollFront = scrollY + viewportHeight * 0.8;
         const isActive = scrollFront >= pawAbsoluteY;
 
+        // Check if this paw's vertical position lies within any blue background area
+        const isBlue = blueRanges.some((range) => paw.y >= range.top && paw.y <= range.bottom);
+
         return (
           <motion.div
             key={paw.id}
-            className="absolute text-brand-primary/20 md:text-brand-primary/50"
+            className={`absolute transition-colors duration-300 ${
+              isBlue
+                ? "text-white/35 md:text-white/70"
+                : "text-brand-primary/20 md:text-brand-primary/50"
+            }`}
             style={{
               left: paw.x,
               top: paw.y,
