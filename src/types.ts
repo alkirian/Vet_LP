@@ -34,3 +34,20 @@ export interface MembershipPlan {
   mercadoPagoLink: string;
 }
 
+export interface LostOrAdoptablePet {
+  id: string;
+  name: string;
+  type: "dog" | "cat";
+  status: "adoptable" | "lost" | "found";
+  gender: "macho" | "hembra";
+  age?: string;
+  size?: "chico" | "mediano" | "grande";
+  location?: string;
+  date?: string;
+  image: string;
+  story: string;
+  health?: string[];
+  contactText: string;
+}
+
+

@@ -1,4 +1,4 @@
-import { ServiceItem, BusinessHours, ContactInfo, MembershipPlan } from "./types";
+import { ServiceItem, BusinessHours, ContactInfo, MembershipPlan, LostOrAdoptablePet } from "./types";
 
 export const businessHours: BusinessHours[] = [
   {
@@ -159,3 +159,70 @@ export const membershipPlans: MembershipPlan[] = [
     mercadoPagoLink: "https://www.mercadopago.com.uy/subscriptions/checkout?preapproval_plan_id=2c9380848037ea4e0180416b99330263"
   }
 ];
+
+export const petsData: LostOrAdoptablePet[] = [
+  {
+    id: "choncho",
+    name: "Choncho (Prueba)",
+    type: "dog",
+    status: "adoptable",
+    gender: "macho",
+    age: "1 año",
+    size: "mediano",
+    image: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=600&auto=format&fit=crop",
+    story: "Choncho fue rescatado cerca de la Ruta 48. Es súper dócil, cariñoso y le encanta jugar a la pelota. Se lleva excelente con niños y otros perros. (Ficha de ejemplo para pruebas de adopción en Las Piedras).",
+    health: ["Vacunas al día", "Castrado", "Desparasitado"],
+    contactText: "Hola! Estoy interesado en adoptar a Choncho (Ficha de Prueba) que vi en la web de Veterinaria Pedrense."
+  },
+  {
+    id: "lola",
+    name: "Lola (Prueba)",
+    type: "dog",
+    status: "adoptable",
+    gender: "hembra",
+    age: "2 meses",
+    size: "chico",
+    image: "https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=600&auto=format&fit=crop",
+    story: "Lola es una cachorrita muy dulce que dejaron en una caja cerca de la veterinaria. Busca una familia responsable que le brinde el amor y la paciencia que todo cachorro necesita. (Ficha de ejemplo para pruebas).",
+    health: ["Desparasitada", "Primera dosis de vacunas"],
+    contactText: "Hola! Quisiera más información sobre la adopción de la cachorrita Lola (Ficha de Prueba)."
+  },
+  {
+    id: "milo",
+    name: "Milo (Prueba)",
+    type: "cat",
+    status: "adoptable",
+    gender: "macho",
+    age: "8 meses",
+    size: "chico",
+    image: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=600&auto=format&fit=crop",
+    story: "Milo es un gatito rescatado muy ronroneador y juguetón. Le encanta trepar y dormir siestas al sol. Ya sabe usar las piedritas sanitarias a la perfección. (Ficha de ejemplo para pruebas de adopción).",
+    health: ["Castrado", "Vacuna Triple Felina", "Desparasitado"],
+    contactText: "Hola! Me interesa adoptar al gatito Milo (Ficha de Prueba) de la veterinaria."
+  },
+  {
+    id: "simba",
+    name: "Simba (Prueba)",
+    type: "dog",
+    status: "lost",
+    gender: "macho",
+    location: "Barrio Centro, Las Piedras",
+    date: "05/07/2026",
+    image: "https://images.unsplash.com/photo-1505628346881-b72b27e84530?q=80&w=600&auto=format&fit=crop",
+    story: "Se busca a Simba, un Beagle que se asustó con los ruidos y escapó. Lleva collar azul sin chapa. Es asustadizo pero muy amigable si le ofreces comida. (Reporte de prueba para testear sección de mascotas perdidas).",
+    contactText: "Hola! Tengo información sobre Simba (Ficha de Prueba), el Beagle perdido."
+  },
+  {
+    id: "firu",
+    name: "Perrito Encontrado (Prueba)",
+    type: "dog",
+    status: "found",
+    gender: "macho",
+    location: "Cerca de Ruta 48 y Luis Batlle Berres",
+    date: "07/07/2026",
+    image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?q=80&w=600&auto=format&fit=crop",
+    story: "Encontramos a este perrito de tamaño mediano corriendo por la ruta con peligro de ser atropellado. Actualmente lo tenemos retenido temporalmente en la clínica. Buscamos a sus dueños. (Ficha de prueba para testear mascotas encontradas).",
+    contactText: "Hola! Creo conocer al dueño del perrito encontrado cerca de la Ruta 48 (Ficha de Prueba)."
+  }
+];
+

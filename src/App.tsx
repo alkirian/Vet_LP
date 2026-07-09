@@ -5,6 +5,7 @@ import Hero from "./components/Hero";
 import Services from "./components/Services";
 import FirstAidGuide from "./components/FirstAidGuide";
 import Membership from "./components/Membership";
+import AdoptionsLostFound from "./components/AdoptionsLostFound";
 import ScheduleLocation from "./components/ScheduleLocation";
 import Testimonials from "./components/Testimonials";
 import FAQ from "./components/FAQ";
@@ -21,7 +22,7 @@ export default function App() {
 
   useEffect(() => {
     // Scroll-Spy implementation using IntersectionObserver
-    const sections = ["inicio", "servicios", "primeros-auxilios", "club", "ubicacion", "testimonios", "faq"];
+    const sections = ["inicio", "servicios", "primeros-auxilios", "club", "adopciones", "ubicacion", "testimonios", "faq"];
     const observers = sections.map((secId) => {
       const element = document.getElementById(secId);
       if (!element) return null;
@@ -83,6 +84,7 @@ export default function App() {
         <Services onModalToggle={setIsModalOpen} />
         <FirstAidGuide />
         <Membership onModalToggle={setIsModalOpen} />
+        <AdoptionsLostFound />
         <ScheduleLocation />
         <Testimonials />
         <FAQ />
@@ -127,23 +129,43 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* WhatsApp FAB for mobile screens - Compact and non-intrusive */}
+      {/* Mobile Floating Actions - WhatsApp + Back to top */}
       <AnimatePresence>
         {!isModalOpen && !isMenuOpen && (
-          <motion.a
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            href={getWhatsAppLink(whatsappMessage)}
-            target="_blank"
-            rel="noreferrer"
-            className="fixed bottom-6 right-6 z-40 w-14 h-14 bg-brand-secondary text-white rounded-full shadow-xl shadow-brand-secondary/30 flex items-center justify-center border border-brand-secondary/80 active:scale-95 transition-transform md:hidden cursor-pointer"
-            id="mobile-whatsapp-fab"
-            title="Agendar Turno por WhatsApp"
-          >
-            <MessageSquare className="w-6 h-6 fill-current animate-pulse" />
-          </motion.a>
+          <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-2.5 items-center md:hidden" id="mobile-floating-actions">
+            {/* Back to top button (shown only after scrolling) */}
+            <AnimatePresence>
+              {showScrollTop && (
+                <motion.button
+                  initial={{ scale: 0, opacity: 0, y: 10 }}
+                  animate={{ scale: 1, opacity: 1, y: 0 }}
+                  exit={{ scale: 0, opacity: 0, y: 10 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                  onClick={scrollToTop}
+                  className="w-12 h-12 bg-white text-brand-primary rounded-full shadow-lg border border-brand-primary-light flex items-center justify-center cursor-pointer active:scale-95 transition-transform"
+                  title="Volver arriba"
+                >
+                  <ArrowUp className="w-5 h-5 stroke-[2.5]" />
+                </motion.button>
+              )}
+            </AnimatePresence>
+
+            {/* Quick Whatsapp float on mobile */}
+            <motion.a
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 260, damping: 20 }}
+              href={getWhatsAppLink(whatsappMessage)}
+              target="_blank"
+              rel="noreferrer"
+              className="w-12 h-12 bg-brand-secondary text-white rounded-full shadow-lg shadow-brand-secondary/30 flex items-center justify-center border border-brand-secondary/80 active:scale-95 transition-transform cursor-pointer"
+              id="mobile-whatsapp-fab"
+              title="Agendar Turno por WhatsApp"
+            >
+              <MessageSquare className="w-5.5 h-5.5 fill-current animate-pulse" />
+            </motion.a>
+          </div>
         )}
       </AnimatePresence>
     </div>

@@ -87,85 +87,91 @@ export default function Services({ onModalToggle }: { onModalToggle?: (isOpen: b
 
         {/* Services Grid / Carousel */}
         <div className="relative">
-          <motion.div
-            ref={containerRef}
-            onScroll={handleScroll}
-            variants={{
-              hidden: {},
-              visible: {
-                transition: {
-                  staggerChildren: 0.1
+          <div className="relative">
+            <motion.div
+              ref={containerRef}
+              onScroll={handleScroll}
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: {
+                    staggerChildren: 0.1
+                  }
                 }
-              }
-            }}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory no-scrollbar scroll-smooth pb-2 sm:pb-0"
-            id="services-grid"
-          >
-            {servicesData.map((service, index) => (
-              <motion.div
-                key={service.id}
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 }
-                }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -6 }}
-                className="group flex flex-col h-full bg-white card-organic border border-brand-primary-light/50 hover:border-brand-primary/30 hover:shadow-xl transition-all duration-300 overflow-hidden w-full shrink-0 snap-center sm:w-auto sm:shrink"
-                id={`service-card-${service.id}`}
-              >
-                {/* Image banner for card */}
-                <div className="p-4 pb-0">
-                  <div className="h-40 relative overflow-hidden image-organic">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-brand-text/40 via-transparent to-transparent" />
-                    <div className="absolute top-3 left-3 bg-brand-bg-warm/95 backdrop-blur-md p-2.5 rounded-2xl text-brand-primary shadow-md overflow-hidden">
-                      <motion.div
-                        variants={{
-                          hover: ICON_HOVER_VARIANTS[service.id] || {}
-                        }}
-                        transition={{ duration: 0.5, ease: "easeInOut" }}
-                      >
-                        <IconMapper name={service.iconName} className="w-5.5 h-5.5" />
-                      </motion.div>
-                    </div>
-                    {/* Test Photo Badge */}
-                    <div className="absolute top-3 right-3 bg-brand-secondary/90 backdrop-blur-xs text-white font-sans text-[9px] font-bold px-2 py-0.5 rounded-lg shadow-sm border border-brand-secondary/20 flex items-center gap-1 z-10 select-none">
-                      <Camera className="w-2.5 h-2.5" />
-                      <span>Foto de prueba</span>
+              }}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory no-scrollbar scroll-smooth pb-2 sm:pb-0"
+              id="services-grid"
+            >
+              {servicesData.map((service, index) => (
+                <motion.div
+                  key={service.id}
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0 }
+                  }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ y: -6 }}
+                  className="group flex flex-col h-full bg-white card-organic border border-brand-primary-light/50 hover:border-brand-primary/30 hover:shadow-xl transition-all duration-300 overflow-hidden w-full shrink-0 snap-center sm:w-auto sm:shrink"
+                  id={`service-card-${service.id}`}
+                >
+                  {/* Image banner for card */}
+                  <div className="p-4 pb-0">
+                    <div className="h-40 relative overflow-hidden image-organic">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        referrerPolicy="no-referrer"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-brand-text/40 via-transparent to-transparent" />
+                      <div className="absolute top-3 left-3 bg-brand-bg-warm/95 backdrop-blur-md p-2.5 rounded-2xl text-brand-primary shadow-md overflow-hidden">
+                        <motion.div
+                          variants={{
+                            hover: ICON_HOVER_VARIANTS[service.id] || {}
+                          }}
+                          transition={{ duration: 0.5, ease: "easeInOut" }}
+                        >
+                          <IconMapper name={service.iconName} className="w-5.5 h-5.5" />
+                        </motion.div>
+                      </div>
+                      {/* Test Photo Badge */}
+                      <div className="absolute top-3 right-3 bg-brand-secondary/90 backdrop-blur-xs text-white font-sans text-[9px] font-bold px-2 py-0.5 rounded-lg shadow-sm border border-brand-secondary/20 flex items-center gap-1 z-10 select-none">
+                        <Camera className="w-2.5 h-2.5" />
+                        <span>Foto de prueba</span>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Card Body */}
-                <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="font-display font-bold text-lg text-brand-text mb-2 group-hover:text-brand-primary transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="font-sans text-brand-text-muted text-sm leading-relaxed mb-6 flex-grow line-clamp-4 font-normal">
-                    {service.description}
-                  </p>
+                  {/* Card Content */}
+                  <div className="p-6 pt-4 flex flex-col justify-between flex-grow">
+                    <div className="flex-grow">
+                      <h3 className="font-display font-bold text-lg text-brand-text mb-2 group-hover:text-brand-primary transition-colors">
+                        {service.title}
+                      </h3>
+                      <p className="font-sans text-brand-text-muted text-sm leading-relaxed mb-6 flex-grow line-clamp-4 font-normal">
+                        {service.description}
+                      </p>
 
-                  {/* Button Action */}
-                  <button
-                    onClick={() => setSelectedService(service)}
-                    className="w-full py-3 px-4 rounded-xl bg-brand-bg-warm border border-brand-primary-light/60 text-brand-text font-sans font-bold text-xs group-hover:bg-brand-primary group-hover:text-white group-hover:border-brand-primary transition-all flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
-                    id={`btn-details-${service.id}`}
-                  >
-                    Ver detalles
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                  </button>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+                      {/* Button Action */}
+                      <button
+                        onClick={() => setSelectedService(service)}
+                        className="w-full py-3 px-4 rounded-xl bg-brand-bg-warm border border-brand-primary-light/60 text-brand-text font-sans font-bold text-xs group-hover:bg-brand-primary group-hover:text-white group-hover:border-brand-primary transition-all flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+                        id={`btn-details-${service.id}`}
+                      >
+                        Ver detalles
+                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+            {/* Horizontal Scroll Fade Indicator */}
+            <div className="absolute right-0 top-0 bottom-2 w-12 bg-gradient-to-l from-white to-transparent pointer-events-none sm:hidden" />
+          </div>
         </div>
 
         {/* Carousel Controls for Mobile */}

@@ -43,9 +43,8 @@ export default function Header({ activeSection, onMenuToggle }: HeaderProps) {
     { name: "Servicios", href: "#servicios" },
     { name: "Primeros Auxilios", href: "#primeros-auxilios" },
     { name: "Planes de Socio", href: "#club" },
-    { name: "Horarios y Ubicación", href: "#ubicacion" },
-    { name: "Testimonios", href: "#testimonios" },
-    { name: "Preguntas Frecuentes", href: "#faq" },
+    { name: "Adopciones y Extraviados", href: "#adopciones" },
+    { name: "Contacto", href: "#ubicacion" },
   ];
 
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -125,14 +124,6 @@ export default function Header({ activeSection, onMenuToggle }: HeaderProps) {
 
             {/* Quick Contact Buttons */}
             <div className="hidden lg:flex items-center space-x-3" id="quick-contact-actions">
-              <a
-                href={`tel:${contactInfo.phoneLandline.replace(/\s+/g, "")}`}
-                className="flex items-center text-brand-text hover:text-brand-primary font-sans font-semibold text-sm transition-colors mr-2"
-                title="Llamar teléfono fijo"
-              >
-                <Phone className="w-4 h-4 mr-1.5 text-brand-primary" />
-                {contactInfo.phoneLandline}
-              </a>
               <a
                 href={getWhatsAppLink("Hola! Me gustaría agendar un turno para mi mascota.")}
                 target="_blank"
